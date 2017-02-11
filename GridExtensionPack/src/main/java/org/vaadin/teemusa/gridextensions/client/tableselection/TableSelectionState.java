@@ -5,7 +5,7 @@ import com.vaadin.shared.ui.grid.selection.MultiSelectionModelState;
 public class TableSelectionState extends MultiSelectionModelState {
 
 	public enum TableSelectionMode {
-		NONE, SIMPLE, CTRL, SHIFT
+		NONE, SINGLE, SIMPLE, CTRL, SHIFT
 	}
 
 	public TableSelectionMode selectionMode = TableSelectionMode.NONE;

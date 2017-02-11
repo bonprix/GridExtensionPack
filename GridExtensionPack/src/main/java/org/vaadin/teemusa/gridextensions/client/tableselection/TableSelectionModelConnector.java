@@ -39,9 +39,9 @@ public class TableSelectionModelConnector extends MultiSelectionModelConnector {
 
 	@OnStateChange("selectionMode")
 	void setSelectionMode() {
-		if (clickHandler != null) {
-			clickHandler.removeHandler();
-			clickHandler = null;
+		if (this.clickHandler != null) {
+			this.clickHandler.removeHandler();
+			this.clickHandler = null;
 		}
 
 		BodyClickHandler handler;
@@ -49,6 +49,9 @@ public class TableSelectionModelConnector extends MultiSelectionModelConnector {
 		switch (getState().selectionMode) {
 		case CTRL:
 			handler = new CtrlClickSelectionHandler(grid);
+			break;
+		case SINGLE:
+			handler = new SingleClickSelectionHandler(grid);
 			break;
 		case SIMPLE:
 			handler = new SimpleClickSelectionHandler(grid);
@@ -61,18 +64,19 @@ public class TableSelectionModelConnector extends MultiSelectionModelConnector {
 			return;
 		}
 
-		clickHandler = grid.addBodyClickHandler(handler);
+		this.clickHandler = grid.addBodyClickHandler(handler);
 	}
 
+	@Override
 	public TableSelectionState getState() {
 		return (TableSelectionState) super.getState();
 	}
 
 	@Override
 	public void onUnregister() {
-		if (clickHandler != null) {
-			clickHandler.removeHandler();
-			clickHandler = null;
+		if (this.clickHandler != null) {
+			this.clickHandler.removeHandler();
+			this.clickHandler = null;
 		}
 
 		super.onUnregister();
